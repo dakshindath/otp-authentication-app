@@ -1,0 +1,101 @@
+@import './globals.css';
+
+.otp-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.otp-container::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: var(--background-gradient);
+}
+
+.otp-card {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 100%;
+  padding: var(--spacing-xl);
+  gap: var(--spacing-md);
+  margin: auto;
+  max-width: 450px;
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  overflow: visible;
+}
+
+.otp-title {
+  font-size: clamp(1.6rem, 10vw, 2.15rem);
+  margin-bottom: var(--spacing-sm);
+}
+
+.otp-subtitle {
+  margin-bottom: var(--spacing-md);
+}
+
+.otp-inputs {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.otp-inputs-container {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.otp-input {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 24px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}
+
+.otp-input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.verify-button {
+  width: 100%;
+  margin-top: var(--spacing-md);
+}
+
+.resend-container {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-lg);
+}
+
+.resend-button {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-weight: 600;
+  padding: 0;
+  margin-left: 5px;
+}
+
+.resend-button:disabled {
+  color: var(--text-secondary);
+  cursor: not-allowed;
+}
+
+@media (min-width: 600px) {
+  .otp-container {
+    padding: var(--spacing-xl);
+  }
+}

@@ -1,0 +1,68 @@
+@import './globals.css';
+
+.login-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.login-container::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: var(--background-gradient);
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 100%;
+  padding: var(--spacing-xl);
+  gap: var(--spacing-md);
+  margin: auto;
+  max-width: 450px;
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  overflow: visible;
+}
+
+.login-title {
+  font-size: clamp(2rem, 10vw, 2.15rem);
+  margin-bottom: var(--spacing-md);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: var(--spacing-md);
+}
+
+.forgot-password {
+  margin-bottom: var(--spacing-md);
+}
+
+.text-link {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 600px) {
+  .login-container {
+    padding: var(--spacing-xl);
+  }
+}
