@@ -1,50 +1,31 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import ThemeWrapper from './ThemeWrapper';
+import '../styles/home.css';
 
 export default function Home() {
   const navigate = useNavigate();
   
   const handleLogout = () => {
-    // Add logout logic here
+    // Clear authentication token
+    localStorage.removeItem('authToken');
     navigate('/signin');
   };
-
   return (
-    <ThemeWrapper>
-      <Box
-        sx={{
-          height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          padding: 3,
-        }}
-      >
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-
-          <Button variant="outlined" onClick={handleLogout}>
-            Logout
-          </Button>
-        </Box>
-        
-        <Box sx={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'center', 
-          justifyContent: 'center',
-          flex: 1
-        }}>
-          <Typography variant="h3" component="h1" gutterBottom>
-            Welcome to your Dashboard
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            You have successfully logged in!
-          </Typography>
-        </Box>
-      </Box>
-    </ThemeWrapper>
+    <div className="home-container">      <div className="header">
+        <h2 className="app-name">OTP Auth App</h2>
+        <button className="logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
+      
+      <div className="dashboard">
+        <div className="welcome-card">
+          <h1 className="welcome-title">Welcome to your Dashboard</h1>
+          <p className="welcome-message">
+            You have successfully authenticated using OTP verification.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }

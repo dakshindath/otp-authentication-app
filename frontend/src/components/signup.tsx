@@ -1,57 +1,7 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Divider from '@mui/material/Divider';
-import FormLabel from '@mui/material/FormLabel';
-import FormControl from '@mui/material/FormControl';
-import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import MuiCard from '@mui/material/Card';
-import { styled } from '@mui/material/styles';
-import { GoogleIcon, FacebookIcon } from './customicon';
-import ThemeWrapper from './ThemeWrapper';
 import axios from 'axios';
-
-const Card = styled(MuiCard)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignSelf: 'center',
-  width: '100%',
-  padding: theme.spacing(4),
-  gap: theme.spacing(2),
-  margin: 'auto',
-  [theme.breakpoints.up('sm')]: {
-    maxWidth: '450px',
-  },
-  boxShadow: theme.palette.mode === 'dark' 
-    ? '0px 5px 15px 0px rgba(0, 0, 0, 0.5), 0px 15px 35px -5px rgba(0, 0, 0, 0.5)' 
-    : 'hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px',
-  overflow: 'visible',
-}));
-
-const SignUpContainer = styled(Stack)(({ theme }) => ({
-  height: '100dvh',
-  padding: theme.spacing(2),
-  [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(4),
-  },
-  '&::before': {
-    content: '""',
-    display: 'block',
-    position: 'absolute',
-    zIndex: -1,
-    inset: 0,
-    backgroundImage:
-    theme.palette.mode === 'dark' 
-      ? 'radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 10%), hsl(0, 0%, 5%))'
-      : 'radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))',
-  },
-}));
+import '../styles/signup.css';
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -129,147 +79,98 @@ export default function SignUp() {
   };
 
   return (
-    <ThemeWrapper>
-      <SignUpContainer direction="column" justifyContent="center">
-        <Card variant="outlined">
-          <Typography
-            component="h1"
-            variant="h4"
-            sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
-          >
-            Sign up
-          </Typography>
+    <div className="signup-container">
+      <div className="signup-card">
+        <h1 className="signup-title">Sign up</h1>
 
-          {apiError && (
-            <Typography color="error" sx={{ mt: 1, mb: 1 }}>
-              {apiError}
-            </Typography>
-          )}
+        {apiError && (
+          <div className="error-message">{apiError}</div>
+        )}
 
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
-          >
-            <FormControl>
-              <FormLabel htmlFor="username">Username</FormLabel>
-              <TextField
-                error={!!errors.username}
-                helperText={errors.username}
-                id="username"
-                name="username"
-                placeholder="username"
-                autoComplete="username"
-                required
-                fullWidth
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel htmlFor="email">Email</FormLabel>
-              <TextField
-                error={!!errors.email}
-                helperText={errors.email}
-                id="email"
-                name="email"
-                placeholder="you@example.com"
-                autoComplete="email"
-                required
-                fullWidth
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel htmlFor="phoneNumber">Phone Number</FormLabel>
-              <TextField
-                error={!!errors.phoneNumber}
-                helperText={errors.phoneNumber}
-                id="phoneNumber"
-                name="phoneNumber"
-                placeholder="1234567890"
-                autoComplete="tel"
-                required
-                fullWidth
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel htmlFor="password">Password</FormLabel>
-              <TextField
-                error={!!errors.password}
-                helperText={errors.password}
-                id="password"
-                name="password"
-                type="password"
-                placeholder="••••••"
-                autoComplete="new-password"
-                required
-                fullWidth
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
-              <TextField
-                error={!!errors.confirmPassword}
-                helperText={errors.confirmPassword}
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                placeholder="••••••"
-                autoComplete="new-password"
-                required
-                fullWidth
-              />
-            </FormControl>
-
-            <FormControlLabel
-              control={<Checkbox value="agree" color="primary" />}
-              label="I agree to the Terms and Conditions"
+        <form onSubmit={handleSubmit} noValidate className="signup-form">
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              className={errors.username ? 'input-error' : ''}
+              id="username"
+              name="username"
+              placeholder="username"
+              autoComplete="username"
+              required
             />
+            {errors.username && <div className="error-text">{errors.username}</div>}
+          </div>
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              disabled={loading}
-            >
-              {loading ? 'Signing up...' : 'Sign up'}
-            </Button>
-          </Box>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              className={errors.email ? 'input-error' : ''}
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              autoComplete="email"
+              required
+            />
+            {errors.email && <div className="error-text">{errors.email}</div>}
+          </div>
 
-          <Divider>or</Divider>
+          <div className="form-group">
+            <label htmlFor="phoneNumber">Phone Number</label>
+            <input
+              className={errors.phoneNumber ? 'input-error' : ''}
+              id="phoneNumber"
+              name="phoneNumber"
+              placeholder="1234567890"
+              autoComplete="tel"
+              required
+            />
+            {errors.phoneNumber && <div className="error-text">{errors.phoneNumber}</div>}
+          </div>
 
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={() => alert('Sign up with Google')}
-              startIcon={<GoogleIcon />}
-            >
-              Sign up with Google
-            </Button>
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={() => alert('Sign up with Facebook')}
-              startIcon={<FacebookIcon />}
-            >
-              Sign up with Facebook
-            </Button>
-          </Box>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              className={errors.password ? 'input-error' : ''}
+              id="password"
+              name="password"
+              type="password"
+              placeholder="••••••"
+              autoComplete="new-password"
+              required
+            />
+            {errors.password && <div className="error-text">{errors.password}</div>}
+          </div>
 
-          <Box>
-            <Typography sx={{ textAlign: 'center' }}>
-              Already have an account?{' '}
-              <Link href="/signin" variant="body2">
-                Sign in
-              </Link>
-            </Typography>
-          </Box>
-        </Card>
-      </SignUpContainer>
-    </ThemeWrapper>
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              className={errors.confirmPassword ? 'input-error' : ''}
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              placeholder="••••••"
+              autoComplete="new-password"
+              required
+            />
+            {errors.confirmPassword && <div className="error-text">{errors.confirmPassword}</div>}
+          </div>
+
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={loading}
+          >
+            {loading ? 'Signing up...' : 'Sign up'}
+          </button>
+        </form>
+
+        <div className="signup-footer">
+          <p>
+            Already have an account?{' '}
+            <a href="/signin" className="text-link">Sign in</a>
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
