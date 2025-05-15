@@ -4,8 +4,8 @@ module.exports = async (email, otp) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail', 
     auth: {
-      user: 'retom7887@gmail.com',
-      pass: 'ajoo cnuw dlwm jhhj', 
+      user: 'your mail',
+      pass: 'your pass', 
     },
     tls: {
       rejectUnauthorized: false, // Allow self-signed certificates if needed
@@ -13,7 +13,7 @@ module.exports = async (email, otp) => {
   });
 
   const mailOptions = {
-    from: 'retom7887@gmail.com',
+    from: 'your mail',
     to: email,
     subject: 'Verification Code',
     text: `Your verification code is: ${otp}`,
